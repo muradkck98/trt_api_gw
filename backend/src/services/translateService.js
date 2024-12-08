@@ -1,10 +1,18 @@
 import fetch from 'node-fetch';
 import translate from 'google-translate-api-browser';
+import NodeCache from 'node-cache';
+
+const cache = new NodeCache({ stdTTL: process.env.CACHE_TTL || 300 });
 
 export const fetchContentAndTranslate = async (contentApis) => {
   const content = [];
 
   for await (const api of contentApis) {
+    if (cache.has(api.lang)) {
+      console.log(`Cache hit for ${api.lang}: Returning cached content.`);
+      content.push(...cache.get(api.lang));
+      continue;
+    }
     try {
       console.log(`Fetching from API: ${api.url} with language: ${api.lang}`);
 
@@ -46,6 +54,7 @@ export const fetchContentAndTranslate = async (contentApis) => {
       );
 
       const validItems = items.filter((item) => item !== null);
+      cache.set(api.lang, validItems);
       content.push(...validItems);
 
     } catch (error) {

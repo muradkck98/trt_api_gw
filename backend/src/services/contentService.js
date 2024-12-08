@@ -53,19 +53,14 @@ export async function fetchUnifiedContent() {
     });
     
     
-
-    // Wait for all API responses
     const results = await Promise.all(promises);
 
-    // Flatten the results and combine all entries
     const unifiedContent = results.flat();
 
-    // If no content is fetched, log a message
     if (unifiedContent.length === 0) {
         console.log('No data fetched from any API.');
     }
 
-    // Cache the unified content
     cache.set('unifiedContent', unifiedContent);
 
     console.log('Data fetched and cached successfully.');

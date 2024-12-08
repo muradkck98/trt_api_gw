@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 
 const App = () => {
-  // API endpoint'leri
   const proxyApiUrl = 'http://localhost:3000/api/proxy/';
   const unifiedApiUrl = 'http://localhost:3000/api/content';
   const translateApiUrl = 'http://localhost:3000/api/translate/digest';
 
   const [responseData, setResponseData] = useState('');
-  const [selectedLang, setSelectedLang] = useState('fra');  // Varsayılan dil "fra" olarak ayarlandı
+  const [selectedLang, setSelectedLang] = useState('fra');
 
   // Proxy API butonları için diller
   const languages = ['fra', 'ara', 'bos', 'sqi', 'mkd', 'rus', 'deu'];
@@ -38,7 +37,6 @@ const App = () => {
 
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
-    {/* Left Section */}
     <div style={{ flex: 1, padding: '20px', borderRight: '1px solid #ccc' }}>
       <section style={{ marginBottom: '20px' }}>
         <h2>Proxy API</h2>
@@ -90,14 +88,13 @@ const App = () => {
       </section>
     </div>
 
-    {/* Right Section */}
     <div
       style={{
         flex: 2,
         padding: '20px',
         background: '#f4f4f4',
-        overflowY: 'auto', // Enable vertical scrolling
-        height: '100vh', // Ensure full height for the container
+        overflowY: 'auto',
+        height: '100vh',
       }}
     >
       <h3>Response Data</h3>
@@ -105,7 +102,7 @@ const App = () => {
         style={{
           whiteSpace: 'pre-wrap',
           wordWrap: 'break-word',
-          maxHeight: 'calc(100vh - 60px)', // Ensures scrollable within the viewport
+          maxHeight: 'calc(100vh - 60px)',
         }}
       >
         {responseData}

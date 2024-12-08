@@ -1,11 +1,11 @@
-import { fetchContentAndTranslate } from '../services/translateService.js'; // Correct path with `.js`
+import { fetchContentAndTranslate } from '../services/translateService.js';
 import { asyncHandler } from '../utils/errorHandler.js';
-import APIs from '../config/apis.js'; // Importing APIs configuration
+import APIs from '../config/apis.js';
 
 export const getDigestContent = asyncHandler(async (req, res) => {
   // Convert APIs object to an array and take the first 3 entries
   const contentApis = Object.entries(APIs)
-    .slice(0, 3) // Taking the first 3 elements
+    .slice(0, 3)
     .map(([lang, url]) => ({ lang, url }));
 
   const content = await fetchContentAndTranslate(contentApis);
